@@ -1,19 +1,33 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(sdl_game LANGUAGES CUDA CXX)
+project(sdl_game LANGUAGES CXX)
 
-# C++ 11 标准编译
+# C++ 17 标准编译
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 # 控制输出的二进制文件位置
 set(BIN_DIR ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 
-# sdl2
-find_package(SDL2 REQUIRED)
-link_libraries(SDL2)
+include_directories(${PROJECT_SOURCE_DIR}/src)
+add_subdirectory(src)
 
+# libSDL2pp
+# depends
+if(EXISTS ${PROJECT_SOURCE_DIR}/libSDL2pp/CMakeLists.txt)
+	# if you need SDL2PP support
+        set(SDL2PP_WITH_IMAGE ON)
+	set(SDL2PP_WITH_TTF ON)
+        set(SDL2PP_WITH_TTF ON)
+	add_subdirectory(libSDL2pp)
+else()
+	find_package(SDL2pp)
+endif()
+
+# Boost
+find_package(Boost ${BOOST_VERSION} REQUIRED COMPONENTS iostreams program_options
+        regex system thread random coroutine locale filesystem)
 
 # protobuf
 find_package(Protobuf REQUIRED)
@@ -59,4 +73,9 @@ endif()
 include(GoogleTest)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-add_executable(test main.cpp)
+
+# executable files
+add_executable(${PROJECT_NAME}_test main.cpp)
+target_link_libraries (${PROJECT_NAME}_test
+            glog::glog ${GTEST_BOTH_LIBRARIES}
+            ${Protobuf_LIBRARIES} SDL2pp::SDL2pp UTILS)

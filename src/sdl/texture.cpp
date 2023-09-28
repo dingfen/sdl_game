@@ -15,10 +15,10 @@
 #include "sdl/texture.hpp"
 
 #include "color.hpp"
-#include "log.hpp"
+#include "glog/logging.h"
 #include "sdl/point.hpp"
 #include "sdl/surface.hpp"
-#include "video.hpp"
+// #include "video.hpp"
 
 static lg::log_domain log_sdl("SDL");
 #define ERR_SDL LOG_STREAM(err, log_sdl)

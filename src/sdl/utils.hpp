@@ -17,9 +17,9 @@
 
 #include "color_range.hpp"
 #include "color.hpp"
-#include "sdl/surface.hpp"
+#include "surface.hpp"
 #include "utils/math.hpp"
-#include "game_version.hpp"
+// #include "game_version.hpp"
 
 #include <SDL2/SDL.h>
 
@@ -31,7 +31,7 @@ namespace sdl
 {
 
 /** Returns the runtime SDL version. */
-version_info get_version();
+// version_info get_version();
 
 /**
  * Returns true if the runtime SDL version is at or greater than the
@@ -69,7 +69,7 @@ inline void sdl_blit(const surface& src, const SDL_Rect* src_rect, surface& dst,
  *  @param z                 The scaling factor. Should be an integer 2-5 (1 is tolerated).
  *  @return		     The scaled surface
  */
-surface scale_surface_xbrz(const surface & surf, std::size_t z);
+// surface scale_surface_xbrz(const surface & surf, std::size_t z);
 
 /** Scale a surface using the nearest neighbor algorithm (provided by xBRZ lib)
  *  @param surf		     The sources surface
@@ -77,7 +77,7 @@ surface scale_surface_xbrz(const surface & surf, std::size_t z);
  *  @param h		     The height of the resulting surface.
  *  @return		     The rescaled surface.
  */
-surface scale_surface_nn(const surface & surf, int w, int h);
+// surface scale_surface_nn(const surface & surf, int w, int h);
 
 /** Scale a surface using alpha-weighted modified bilinear filtering
  *  Note: causes artifacts with alpha gradients, for example in some portraits

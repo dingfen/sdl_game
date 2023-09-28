@@ -16,7 +16,7 @@
 #include "sdl/input.hpp"
 
 #include "sdl/point.hpp"
-#include "video.hpp"
+// #include "video.hpp"
 
 #include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_keyboard.h>
